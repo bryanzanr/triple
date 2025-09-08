@@ -1,5 +1,8 @@
+# Gemfile
+ruby ">= 3.2"
 source "https://rubygems.org"
 
+# ... default Rails gems ...
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.1"
 # Use postgresql as the database for Active Record
@@ -38,6 +41,12 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # (key gems)
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'database_cleaner-active_record'
 end
 
 
