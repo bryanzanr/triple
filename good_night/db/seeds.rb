@@ -7,3 +7,21 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+# db/seeds.rb
+
+# Wipe out existing data to start fresh
+Follow.delete_all
+SleepRecord.delete_all
+User.delete_all
+
+# Create some sample users
+users = User.create!([
+  { name: "Alice" },
+  { name: "Bob" },
+  { name: "Charlie" }
+])
+
+puts "Seeded #{users.count} users:"
+users.each do |u|
+  puts "- id=#{u.id}, name=#{u.name}"
+end

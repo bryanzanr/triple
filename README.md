@@ -31,7 +31,7 @@ Design Decision:
 * Prepare the controllers and serialization in app/controllers (main application, user that include follow flow / mechanism, sleep_record that includes clock in / out action). 
 * Execute rails db:create (to validate the created model / schema if not existed yet, if already existed can execute rails db:drop first which later will create database good_night_development for the app and good_night_test for the spec).
 * Execute rails db:migrate (to generate the initial migration into the previous created databases which will be saved in db/schema.rb).
-* Execute rails db:seed (to populate the data from db/seeds.rb)
+* Execute rails db:seed (to populate the users data from db/seeds.rb which will also remove all of the existing data if any)
 * Execute bundle exec rspec (to check all the unit tests or add the file in the end of statement if wanted to be specific)
 * Create docker-compose.yml for running through container.
 * Create README.md for explaining about setup instructions, architecture explanation, and important note. 
@@ -44,23 +44,32 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites (How to set up your machine)
 
-1. Navigate to the directory where you've cloned this repo and setting up the docker first.
-2. In the directory where you've cloned this repo, move into the good_night/ folder for installing all its dependencies (if using docker can be done through docker-compose build).
+1. Navigate to the directory where you've cloned this repo and setting up the docker and database first (can also populate manually or directly using SQL if necessary).
+
+    ```sql
+    INSERT INTO users (name, created_at, updated_at)
+    VALUES
+    ('Alice', NOW(), NOW()),
+    ('Bob', NOW(), NOW()),
+    ('Charlie', NOW(), NOW());
+    ```
+
+2. In the directory where you've cloned this repo, move into the good_night/ folder for installing all its dependencies (if using docker can be done through `docker-compose build`).
 
     ```bash
     bundle install
     ```
 
-    Dependencies are all listed in `.bundle/`.
+    Dependencies are all listed in `Gemfile`.
 
-3. Execute rails db:prepare (for doing the migration first) and run the app (if using docker can be done through docker-compose up --build). 
+3. Execute `rails db:prepare` (for doing the migration first) and run the app (if using docker can be done through `docker-compose up --build` for starting the service). 
 
     ```bash
     rails server
     ```
 
 4. The app is now running! To check that the web is actually running,
-try to send a GET request to it, for instance (or you can also execute rails c for opening the console directly to test):
+try to send a GET request to it, for instance (or you can also execute `rails c` for opening the console directly to test):
 
     ```bash
     curl http://127.0.0.1:3000
@@ -68,25 +77,27 @@ try to send a GET request to it, for instance (or you can also execute rails c f
 
     or open `http://localhost:3000` from your browser.
 
-### Installing (How to check and test the program)
+### Installing (How to check and test the program using Docker)
 
-1. Make sure you already pull the docker images and run the container.
-Both are listed in `Dockerfile` so if you followed the instructions to setup your machine above then they should already be installed and running.
-2. You can run the check for running container ID with `docker ps` and for the installed images with `docker images` respectively.
-3. To run the Postgre Structured Query Language (PostgreSQL) console in one command, you can use `psql`. This is useful to check the database directly.
-4. For more info on what you can do with `docker`, run `docker --help`.
+1. If you're using docker, make sure you already pull the docker images and run the container. Both are listed in `Dockerfile` and `docker-compose.yml` so if you followed the instructions to setup your machine above then they should already be installed and running. 
+2. After the container is running, you can run seeds using `docker-compose exec web rails db:seed`
+3. You can run the check for running container ID with `docker ps` and for the installed images with `docker images` respectively.
+4. To run the Postgre Structured Query Language (PostgreSQL) console in one command, you can use `psql`. This is useful to check the database directly.
+5. For more info on what you can do with `docker`, run `docker --help`.
 
 ## Documentation
 
 ### User
 
+* [Index](#index)
+* [Show](#show)
 * [Follow](#follow)
 * [Unfollow](#unfollow)
 * [Following Sleep Records](#following)
 
 ### Sleep Record
 
-* [List](#index)
+* [List](#list)
 * [Create](#create)
 * [Update](#update)
 * [Detail](#detail)
@@ -94,6 +105,12 @@ Both are listed in `Dockerfile` so if you followed the instructions to setup you
 ### Other
 * [Clock In](#in)
 * [Clock Out](#out)
+
+## Index
+URL: GET - `http://localhost:3000/api/users`
+
+## Show
+URL: GET - `http://localhost:3000/api/users/:id`
 
 ## Follow
 URL: POST - `http://localhost:3000/api/users/:id/follow`
@@ -132,7 +149,7 @@ Example Response Body:
     "duration_sec": 1
 ```
 
-## Index
+## List
 URL: GET - `http://localhost:3000/api/sleep_records`
 
 ## Create
