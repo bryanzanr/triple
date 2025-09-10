@@ -1,7 +1,7 @@
 # Good Night –  System
 
 ## Ruby 3.3.5 (2024-09-03 revision ef084cc8f4)
-## API (Rails 7.2.2.2 / PostgreSQL 11.5)
+## API (Rails 7.2.2.2 / PostgreSQL 17 Server 11.5 Client)
 
 ## How the Applications Work
 
@@ -29,8 +29,10 @@ Design Decision:
 * Prepare the  schema and migration in db/migration (users, follows, and sleep_records).
 * Prepare the models in app/models (user, follow, sleep_record).
 * Prepare the controllers and serialization in app/controllers (main application, user that include follow flow / mechanism, sleep_record that includes clock in / out action). 
-* Execute rails db:create (to validate the created model / schema).
-* Execute rails db:migrate (to generate the initial migration).
+* Execute rails db:create (to validate the created model / schema if not existed yet, if already existed can execute rails db:drop first which later will create database good_night_development for the app and good_night_test for the spec).
+* Execute rails db:migrate (to generate the initial migration into the previous created databases which will be saved in db/schema.rb).
+* Execute rails db:seed (to populate the data from db/seeds.rb)
+* Execute bundle exec rspec (to check all the unit tests or add the file in the end of statement if wanted to be specific)
 * Create docker-compose.yml for running through container.
 * Create README.md for explaining about setup instructions, architecture explanation, and important note. 
 * Create .gitignore for excluding the generated / binary files. 
@@ -43,7 +45,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites (How to set up your machine)
 
 1. Navigate to the directory where you've cloned this repo and setting up the docker first.
-2. In the directory where you've cloned this repo, move into the good_night/ folder for installing all its dependencies.
+2. In the directory where you've cloned this repo, move into the good_night/ folder for installing all its dependencies (if using docker can be done through docker-compose build).
 
     ```bash
     bundle install
@@ -51,14 +53,14 @@ These instructions will get you a copy of the project up and running on your loc
 
     Dependencies are all listed in `.bundle/`.
 
-3. Run the app (if using docker can be done through docker-compose up --build). 
+3. Execute rails db:prepare (for doing the migration first) and run the app (if using docker can be done through docker-compose up --build). 
 
     ```bash
     rails server
     ```
 
 4. The app is now running! To check that the web is actually running,
-try to send a GET request to it, for instance:
+try to send a GET request to it, for instance (or you can also execute rails c for opening the console directly to test):
 
     ```bash
     curl http://127.0.0.1:3000

@@ -1,4 +1,4 @@
-# db/migrate/20250908_create_follows.rb
+# db/migrate/20250907_create_follows.rb
 class CreateFollows < ActiveRecord::Migration[7.1]
     def change
         create_table :follows do |t|
