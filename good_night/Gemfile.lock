@@ -297,16 +297,19 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
-  database_cleaner-active_record (~> 2.2)
+  database_cleaner-active_record
   debug
-  factory_bot_rails (~> 6.5)
-  faker (~> 3.5)
+  factory_bot_rails
+  faker
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.1)
-  rspec-rails (~> 8.0)
+  rspec-rails
   rubocop-rails-omakase
   tzinfo-data
+
+RUBY VERSION
+   ruby 3.3.5p100
 
 BUNDLED WITH
    2.5.16
