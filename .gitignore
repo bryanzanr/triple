@@ -1,4 +1,5 @@
 # Ignore generated files as it's considered binary. 
+.DS_Store
 *.pdf
 *.gem
 *.rbc

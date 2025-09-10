@@ -1,0 +1,1428 @@
+{
+	"info": {
+		"_postman_id": "4f7497b7-7792-4d25-a513-92fb4d93a3e3",
+		"name": "Triple",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (Not Empty Array)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"dc88cf96b411a750051a31d4bbdb2185\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "f073f125-07a7-4382-bef7-73e2695f2c96"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.377726"
+						},
+						{
+							"key": "server-timing",
+							"value": "sql.active_record;dur=51.17, start_processing.action_controller;dur=0.02, instantiation.active_record;dur=11.08, process_action.action_controller;dur=157.75"
+						},
+						{
+							"key": "content-length",
+							"value": "343"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Alice\",\n        \"created_at\": \"2025-09-11T00:13:48.251+07:00\",\n        \"updated_at\": \"2025-09-11T00:13:48.251+07:00\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Bob\",\n        \"created_at\": \"2025-09-11T00:13:48.264+07:00\",\n        \"updated_at\": \"2025-09-11T00:13:48.264+07:00\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Charlie\",\n        \"created_at\": \"2025-09-11T00:13:48.271+07:00\",\n        \"updated_at\": \"2025-09-11T00:13:48.271+07:00\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/users/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success 200 (not 404)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"e04f3b1a5a645035b9fb8df6542f03da\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "b3092dbb-d95b-4f44-8a2b-3b5a5c8c16a9"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.289952"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=1.55, instantiation.active_record;dur=0.06, process_action.action_controller;dur=34.40"
+						},
+						{
+							"key": "content-length",
+							"value": "113"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"Alice\",\n    \"created_at\": \"2025-09-11T00:13:48.251+07:00\",\n    \"updated_at\": \"2025-09-11T00:13:48.251+07:00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Follow",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "1",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/users/:id/follow",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						":id",
+						"follow"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (not unprocessable entity if follow the same id and X-User-Id)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users/:id/follow",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								":id",
+								"follow"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"4062edaf750fb8074e7e83e0c9028c94\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "4987b86a-be70-495e-ae26-a1f5f5f1a234"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.044651"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=13.20, instantiation.active_record;dur=0.20, start_transaction.active_record;dur=0.01, transaction.active_record;dur=15.18, process_action.action_controller;dur=27.12"
+						},
+						{
+							"key": "content-length",
+							"value": "11"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"ok\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Unfollow",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "1",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/users/:id/unfollow",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						":id",
+						"unfollow"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (ok: true and deleted if existed)",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users/:id/unfollow",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								":id",
+								"unfollow"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"4062edaf750fb8074e7e83e0c9028c94\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "f2be5116-d803-4557-86b8-0d6a2db9c448"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.396715"
+						},
+						{
+							"key": "server-timing",
+							"value": "sql.active_record;dur=41.82, start_processing.action_controller;dur=0.02, instantiation.active_record;dur=10.54, process_action.action_controller;dur=154.52"
+						},
+						{
+							"key": "content-length",
+							"value": "11"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"ok\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Following",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "4",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/users/:id/following_sleep_records?limit=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						":id",
+						"following_sleep_records"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (with seed data instead of just initial user SQL)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "4",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/users/:id/following_sleep_records?limit=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								":id",
+								"following_sleep_records"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"8cbb13ae6665aa2fdfe69c3c6c7773c3\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "2fcb79de-aa02-4c02-a73b-afc4b375d08b"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.517317"
+						},
+						{
+							"key": "server-timing",
+							"value": "sql.active_record;dur=67.75, start_processing.action_controller;dur=0.02, instantiation.active_record;dur=23.01, process_action.action_controller;dur=266.49"
+						},
+						{
+							"key": "content-length",
+							"value": "149"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"user_id\": 5,\n        \"user_name\": \"Bob\",\n        \"started_at\": \"2025-09-02T22:00:00.000+07:00\",\n        \"ended_at\": \"2025-09-03T05:00:00.000+07:00\",\n        \"duration_sec\": 25200\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "1",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/sleep_records",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"sleep_records"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (after do clock in)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/sleep_records",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sleep_records"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"6a2f126e5a44d2e311849d97249db1ca\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "c91cecc6-b213-4155-a05d-f57d0ba3337d"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.023188"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=0.89, instantiation.active_record;dur=0.18, process_action.action_controller;dur=7.12"
+						},
+						{
+							"key": "content-length",
+							"value": "193"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"started_at\": \"2025-09-11T00:27:56.585+07:00\",\n        \"ended_at\": null,\n        \"duration_sec\": null,\n        \"created_at\": \"2025-09-11T00:27:56.597+07:00\",\n        \"updated_at\": \"2025-09-11T00:27:56.597+07:00\"\n    }\n]"
+				},
+				{
+					"name": "Success again (after do clock out)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/sleep_records",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sleep_records"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"516d2f41136e07b819e30623d2ac6845\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "1a511e25-2265-464d-9372-0de5e75b7e64"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.023190"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=0.94, instantiation.active_record;dur=0.21, process_action.action_controller;dur=6.96"
+						},
+						{
+							"key": "content-length",
+							"value": "219"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"started_at\": \"2025-09-11T00:27:56.585+07:00\",\n        \"ended_at\": \"2025-09-11T00:33:35.817+07:00\",\n        \"duration_sec\": 339,\n        \"created_at\": \"2025-09-11T00:27:56.597+07:00\",\n        \"updated_at\": \"2025-09-11T00:33:35.819+07:00\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "1",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sleep_record\": {\n        \"started_at\": \"2025-09-12T00:27:56.585+07:00\",\n        \"ended_at\": \"2025-09-13T00:27:56.585+07:00\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/sleep_records",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"sleep_records"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (without do clock in or out)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sleep_record\": {\n        \"started_at\": \"2025-09-12T00:27:56.585+07:00\",\n        \"ended_at\": \"2025-09-13T00:27:56.585+07:00\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/sleep_records",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sleep_records"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"30d744e846184e60a0a700d81d9ece58\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "23b9a5d3-6256-489d-8841-cdbc40b04b5a"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.182417"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=11.08, instantiation.active_record;dur=0.43, start_transaction.active_record;dur=0.01, transaction.active_record;dur=47.86, process_action.action_controller;dur=111.83"
+						},
+						{
+							"key": "content-length",
+							"value": "219"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"user_id\": 1,\n    \"started_at\": \"2025-09-12T00:27:56.585+07:00\",\n    \"ended_at\": \"2025-09-13T00:27:56.585+07:00\",\n    \"duration_sec\": 86400,\n    \"created_at\": \"2025-09-11T00:44:47.814+07:00\",\n    \"updated_at\": \"2025-09-11T00:44:47.814+07:00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "1",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sleep_record\": {\n        \"started_at\": \"2025-09-10T00:27:56.585+07:00\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/sleep_records/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"sleep_records",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (not unprocessable entity if invalid time)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sleep_record\": {\n        \"started_at\": \"2025-09-10T00:27:56.585+07:00\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/sleep_records/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sleep_records",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"9cfda6d51557b9999fb88419a1631910\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "4100b58e-1d17-4436-bfe5-1c044bc2b772"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.033281"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=6.94, instantiation.active_record;dur=0.16, start_transaction.active_record;dur=0.02, transaction.active_record;dur=7.77, process_action.action_controller;dur=16.36"
+						},
+						{
+							"key": "content-length",
+							"value": "219"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user_id\": 1,\n    \"started_at\": \"2025-09-10T00:27:56.585+07:00\",\n    \"duration_sec\": 86739,\n    \"id\": 1,\n    \"ended_at\": \"2025-09-11T00:33:35.817+07:00\",\n    \"created_at\": \"2025-09-11T00:27:56.597+07:00\",\n    \"updated_at\": \"2025-09-11T00:47:54.068+07:00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Detail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "1",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/sleep_records/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"sleep_records",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (after do clock out)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/sleep_records/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"sleep_records",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"75a5b2ec4a0f9540659b023b3f552ef2\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "a5d6e58c-c850-4a53-ac0f-6a6e58c3940b"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.050364"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=3.71, instantiation.active_record;dur=0.51, process_action.action_controller;dur=24.75"
+						},
+						{
+							"key": "content-length",
+							"value": "217"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"user_id\": 1,\n    \"started_at\": \"2025-09-11T00:27:56.585+07:00\",\n    \"ended_at\": \"2025-09-11T00:33:35.817+07:00\",\n    \"duration_sec\": 339,\n    \"created_at\": \"2025-09-11T00:27:56.597+07:00\",\n    \"updated_at\": \"2025-09-11T00:33:35.819+07:00\"\n}"
+				}
+			]
+		},
+		{
+			"name": "In",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "1",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/clock_in",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clock_in"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (not conflict if already done before)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/clock_in",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"clock_in"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"ef1bb8550e290507f9d1ff47ad41b587\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "aa17aba9-ddec-49b9-ab91-e2ec44bd3e8e"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.104959"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=22.21, instantiation.active_record;dur=6.12, start_transaction.active_record;dur=0.02, transaction.active_record;dur=16.64, process_action.action_controller;dur=77.51"
+						},
+						{
+							"key": "content-length",
+							"value": "413"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"started_at\": \"2025-09-11T00:27:56.585+07:00\",\n        \"ended_at\": null,\n        \"duration_sec\": null,\n        \"created_at\": \"2025-09-11T00:27:56.597+07:00\",\n        \"updated_at\": \"2025-09-11T00:27:56.597+07:00\"\n    },\n    \"open_clock_ins\": [\n        {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"started_at\": \"2025-09-11T00:27:56.585+07:00\",\n            \"ended_at\": null,\n            \"duration_sec\": null,\n            \"created_at\": \"2025-09-11T00:27:56.597+07:00\",\n            \"updated_at\": \"2025-09-11T00:27:56.597+07:00\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Out",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User-Id",
+						"value": "1",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/clock_out",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"clock_out"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success (not 422 unprocessable entity because there's open clock in)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-Id",
+								"value": "1",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/clock_out",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"clock_out"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"1cd2bc9b4f7120ec05f348112a25a961\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "9f997d2f-df72-4fbb-9d7b-3017db127fc2"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.054778"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=13.64, instantiation.active_record;dur=0.29, start_transaction.active_record;dur=0.02, transaction.active_record;dur=11.28, process_action.action_controller;dur=30.45"
+						},
+						{
+							"key": "content-length",
+							"value": "217"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user_id\": 1,\n    \"ended_at\": \"2025-09-11T00:33:35.817+07:00\",\n    \"duration_sec\": 339,\n    \"id\": 1,\n    \"started_at\": \"2025-09-11T00:27:56.585+07:00\",\n    \"created_at\": \"2025-09-11T00:27:56.597+07:00\",\n    \"updated_at\": \"2025-09-11T00:33:35.819+07:00\"\n}"
+				}
+			]
+		}
+	]
+}

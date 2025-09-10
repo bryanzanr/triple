@@ -31,7 +31,8 @@ Design Decision:
 * Prepare the controllers and serialization in app/controllers (main application, user that include follow flow / mechanism, sleep_record that includes clock in / out action). 
 * Execute rails db:create (to validate the created model / schema if not existed yet, if already existed can execute rails db:drop first which later will create database good_night_development for the app and good_night_test for the spec).
 * Execute rails db:migrate (to generate the initial migration into the previous created databases which will be saved in db/schema.rb).
-* Execute rails db:seed (to populate the users data from db/seeds.rb which will also remove all of the existing data if any)
+* Execute rails db:seed (to populate the data from db/seeds.rb which will also remove all of the existing data if any)
+* Prepare the unit tests for previous models (spec/models/) and controllers (spec/requests/). 
 * Execute bundle exec rspec (to check all the unit tests or add the file in the end of statement if wanted to be specific)
 * Create docker-compose.yml for running through container.
 * Create README.md for explaining about setup instructions, architecture explanation, and important note. 
@@ -109,13 +110,49 @@ try to send a GET request to it, for instance (or you can also execute `rails c`
 ## Index
 URL: GET - `http://localhost:3000/api/users`
 
+Example Response Body (based on the initial SQL):
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Alice",
+        "created_at": "2025-09-11T00:13:48.251+07:00",
+        "updated_at": "2025-09-11T00:13:48.251+07:00"
+    },
+    {
+        "id": 2,
+        "name": "Bob",
+        "created_at": "2025-09-11T00:13:48.264+07:00",
+        "updated_at": "2025-09-11T00:13:48.264+07:00"
+    },
+    {
+        "id": 3,
+        "name": "Charlie",
+        "created_at": "2025-09-11T00:13:48.271+07:00",
+        "updated_at": "2025-09-11T00:13:48.271+07:00"
+    }
+]
+```
+
 ## Show
 URL: GET - `http://localhost:3000/api/users/:id`
+
+Example Response Body (based on the initial SQL and with id = 1):
+
+```json
+{
+    "id": 1,
+    "name": "Alice",
+    "created_at": "2025-09-11T00:13:48.251+07:00",
+    "updated_at": "2025-09-11T00:13:48.251+07:00"
+}
+```
 
 ## Follow
 URL: POST - `http://localhost:3000/api/users/:id/follow`
 
-Example Response Body:
+Example Response Body (X-User-Id on request header = 1 & id = 2):
 
 ```json
 {
@@ -137,35 +174,134 @@ Example Response Body:
 ## Following
 URL: GET - `http://localhost:3000/api/users/:id/following_sleep_records?limit=`
 
-Example Response Body:
+Example Response Body (with seed data instead of just initial SQL):
 
 ```json
-{
-   "id": 1,
-    "user_id": 1,
-    "user_name": "admin",
-    "started_at": "2025-09-28T15:27:14.780Z",
-    "ended_at": "2025-09-28T15:27:14.780Z",
-    "duration_sec": 1
+[
+    {
+        "id": 3,
+        "user_id": 5,
+        "user_name": "Bob",
+        "started_at": "2025-09-02T22:00:00.000+07:00",
+        "ended_at": "2025-09-03T05:00:00.000+07:00",
+        "duration_sec": 25200
+    }
+]
 ```
 
 ## List
 URL: GET - `http://localhost:3000/api/sleep_records`
 
+Example Response Body (after successful clock in):
+
+```json
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "started_at": "2025-09-11T00:27:56.585+07:00",
+        "ended_at": null,
+        "duration_sec": null,
+        "created_at": "2025-09-11T00:27:56.597+07:00",
+        "updated_at": "2025-09-11T00:27:56.597+07:00"
+    }
+]
+```
+
 ## Create
 URL: POST - `http://localhost:3000/api/sleep_records`
+
+Example Request Body (for add new record without in and out):
+
+```json
+{
+    "sleep_record": {
+        "started_at": "2025-09-12T00:27:56.585+07:00",
+        "ended_at": "2025-09-13T00:27:56.585+07:00"
+    }
+}
+```
 
 ## Update
 URL: PATCH / PUT - `http://localhost:3000/api/sleep_records/:id`
 
+Example Response Body (after successful update):
+
+```json
+{
+    "user_id": 1,
+    "started_at": "2025-09-10T00:27:56.585+07:00",
+    "duration_sec": 86739,
+    "id": 1,
+    "ended_at": "2025-09-11T00:33:35.817+07:00",
+    "created_at": "2025-09-11T00:27:56.597+07:00",
+    "updated_at": "2025-09-11T00:47:54.068+07:00"
+}
+```
+
 ## Detail
 URL: GET - `http://localhost:3000/api/sleep_records/:id`
+
+Example Response Body (after successful clock out):
+
+```json
+{
+    "id": 1,
+    "user_id": 1,
+    "started_at": "2025-09-11T00:27:56.585+07:00",
+    "ended_at": "2025-09-11T00:33:35.817+07:00",
+    "duration_sec": 339,
+    "created_at": "2025-09-11T00:27:56.597+07:00",
+    "updated_at": "2025-09-11T00:33:35.819+07:00"
+}
+```
 
 ## In
 URL: POST - `http://localhost:3000/api/clock_in`
 
+Example Response Body (with X-User_Id header = 1 and have never execute the request before out first):
+
+```json
+{
+    "record": {
+        "id": 1,
+        "user_id": 1,
+        "started_at": "2025-09-11T00:27:56.585+07:00",
+        "ended_at": null,
+        "duration_sec": null,
+        "created_at": "2025-09-11T00:27:56.597+07:00",
+        "updated_at": "2025-09-11T00:27:56.597+07:00"
+    },
+    "open_clock_ins": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "started_at": "2025-09-11T00:27:56.585+07:00",
+            "ended_at": null,
+            "duration_sec": null,
+            "created_at": "2025-09-11T00:27:56.597+07:00",
+            "updated_at": "2025-09-11T00:27:56.597+07:00"
+        }
+    ]
+}
+```
+
 ## Out
 URL: POST - `http://localhost:3000/api/clock_out`
+
+Example Response Body (with X-User_Id header = 1 which will also reflect in the list if execute again):
+
+```json
+{
+    "user_id": 1,
+    "ended_at": "2025-09-11T00:33:35.817+07:00",
+    "duration_sec": 339,
+    "id": 1,
+    "started_at": "2025-09-11T00:27:56.585+07:00",
+    "created_at": "2025-09-11T00:27:56.597+07:00",
+    "updated_at": "2025-09-11T00:33:35.819+07:00"
+}
+```
 
 Postman's API Documentation can be found [here](triple.postman_collection.json).
 
