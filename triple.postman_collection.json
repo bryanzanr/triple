@@ -11,7 +11,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/users",
+					"raw": "http://localhost:3000/api/users?page=2&items=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -20,6 +20,16 @@
 					"path": [
 						"api",
 						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "items",
+							"value": "1"
+						}
 					]
 				}
 			},
@@ -483,7 +493,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/users/:id/following_sleep_records?limit=1",
+					"raw": "http://localhost:3000/api/users/following_sleep_records?page=2&items=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -492,19 +502,16 @@
 					"path": [
 						"api",
 						"users",
-						":id",
 						"following_sleep_records"
 					],
 					"query": [
 						{
-							"key": "limit",
-							"value": "1"
-						}
-					],
-					"variable": [
+							"key": "page",
+							"value": "2"
+						},
 						{
-							"key": "id",
-							"value": "4"
+							"key": "items",
+							"value": "1"
 						}
 					]
 				}
@@ -522,7 +529,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/api/users/:id/following_sleep_records?limit=1",
+							"raw": "http://localhost:3000/api/users/following_sleep_records?page=1&items=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -531,19 +538,16 @@
 							"path": [
 								"api",
 								"users",
-								":id",
 								"following_sleep_records"
 							],
 							"query": [
 								{
-									"key": "limit",
+									"key": "page",
 									"value": "1"
-								}
-							],
-							"variable": [
+								},
 								{
-									"key": "id",
-									"value": "4"
+									"key": "items",
+									"value": "1"
 								}
 							]
 						}
@@ -622,7 +626,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/sleep_records",
+					"raw": "http://localhost:3000/api/sleep_records?page=2&size=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -631,6 +635,16 @@
 					"path": [
 						"api",
 						"sleep_records"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "items",
+							"value": "1"
+						}
 					]
 				}
 			},

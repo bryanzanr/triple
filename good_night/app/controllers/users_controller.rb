@@ -1,10 +1,14 @@
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
     before_action :require_current_user!, only: [:follow, :unfollow, :following_sleep_records]
-    before_action :set_user, only: [:show, :follow, :unfollow, :following_sleep_records]
+    before_action :set_user, only: [:show, :follow, :unfollow]
     
     def index
-        render json: User.all.order(:id)
+        per_page = params[:items].to_i
+        per_page = 20 if per_page <= 0
+        paginated_response(User.all.order(:id)
+            .page(params[:page].presence&.to_i || 1)
+            .per(per_page), per_page)
     end
     
     def show
@@ -25,7 +29,7 @@ class UsersController < ApplicationController
         render json: { ok: true }
     end
 
-    # GET /api/users/:id/following_sleep_records
+    # GET /api/users/following_sleep_records
     def following_sleep_records    
         # Compute previous calendar week in app timezone
         Time.use_zone(Time.zone) do
@@ -34,7 +38,10 @@ class UsersController < ApplicationController
             start_of_prev_week = start_of_this_week - 1.week
             end_of_prev_week = start_of_this_week - 1.second
             
-            following_ids = @user.following.select(:id)
+            following_ids = @current_user.following.select(:id)
+            # sanitize items param
+            per_page = params[:items].to_i
+            per_page = 20 if per_page <= 0   # fallback to default
             # record considered if it ENDED in previous week
             records = SleepRecord
               .closed_records
@@ -43,8 +50,8 @@ class UsersController < ApplicationController
               .select('sleep_records.*, users.name AS user_name')
               .joins(:user)
               .order(duration_sec: :desc, ended_at: :desc)
-              .page(params[:page] || 1)    # default to page 1
-              .per(params[:items] || 20)   # default 20 per page
+              .page(params[:page].presence&.to_i || 1) # default to page 1
+              .per(per_page) # default 20 per page
 
             payload = records.map do |r|
                 {
@@ -57,16 +64,7 @@ class UsersController < ApplicationController
                 }
             end
         
-            render json: {
-                records: records.as_json,
-                pagination: {
-                    current_page: records.current_page,
-                    next_page: records.next_page,
-                    prev_page: records.prev_page,
-                    total_pages: records.total_pages,
-                    total_count: records.total_count
-                }
-            }
+            paginated_response(records, per_page)
         end
     end
     

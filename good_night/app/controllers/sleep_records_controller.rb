@@ -6,8 +6,12 @@ class SleepRecordsController < ApplicationController
     # GET /api/sleep_records
     # List current user's sleep records (newest first)
     def index
+      per_page = params[:items].to_i
+      per_page = 20 if per_page <= 0
       records = @current_user.sleep_records.order(created_at: :desc)
-      render json: records
+        .page(params[:page].presence&.to_i || 1)
+        .per(per_page)
+      paginated_response(records, per_page)
     end
   
     # POST /api/sleep_records

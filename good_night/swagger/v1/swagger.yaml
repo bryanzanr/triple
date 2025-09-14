@@ -20,17 +20,127 @@ paths:
           description: clocked in
         '409':
           description: already clocked in
-  "/api/users/{id}/following_sleep_records":
+  "/api/sleep_records":
     get:
-      summary: Get following users sleep records (last week, sorted by duration)
+      summary: List current user sleep records
       tags:
-      - Users
+      - SleepRecords
+      parameters:
+      - name: X-User-Id
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: records listed
+    post:
+      summary: Create a sleep record
+      tags:
+      - SleepRecords
+      parameters:
+      - name: X-User-Id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: record created
+        '422':
+          description: invalid record
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                started_at:
+                  type: string
+                  format: date_time
+                ended_at:
+                  type: string
+                  format: date_time
+              required:
+              - started_at
+  "/api/sleep_records/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: X-User-Id
+      in: header
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show a sleep record
+      tags:
+      - SleepRecords
+      responses:
+        '404':
+          description: not found
+    put:
+      summary: Update a sleep record
+      tags:
+      - SleepRecords
       parameters:
       - name: id
         in: path
         required: true
         schema:
           type: string
+      - name: X-User-Id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: record updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ended_at:
+                  type: string
+                  format: date-time
+              required:
+              - ended_at
+  "/api/clock_out":
+    post:
+      summary: Clock out from current open record
+      tags:
+      - SleepRecords
+      parameters:
+      - name: X-User-Id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '422':
+          description: no open record
+  "/api/users/following_sleep_records":
+    get:
+      summary: Get following users sleep records (last week, sorted by duration)
+      tags:
+      - Users
+      parameters:
       - name: X-User-Id
         in: header
         required: true
@@ -49,6 +159,79 @@ paths:
       responses:
         '200':
           description: success
+  "/api/users":
+    get:
+      summary: List all users
+      tags:
+      - Users
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: items
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: users listed
+  "/api/users/{id}":
+    get:
+      summary: Show a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user found
+        '404':
+          description: user not found
+  "/api/users/{id}/follow":
+    post:
+      summary: Follow a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: follow created
+  "/api/users/{id}/unfollow":
+    delete:
+      summary: Unfollow a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-User-Id
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: unfollowed
 servers:
 - url: http://{defaultHost}
   variables:

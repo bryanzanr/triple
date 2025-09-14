@@ -3,18 +3,18 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   scope :api do
+    scope :users do
+      get "following_sleep_records", to: "users#following_sleep_records"
+    end
     resources :users, only: [:index, :show] do
       member do
         post :follow # POST /api/users/:id/follow
         delete :unfollow # DELETE /api/users/:id/unfollow
-        get :following_sleep_records # GET /api/users/:id/following_sleep_records
       end
     end
     
-    
     # Sleep records
     resources :sleep_records, only: [:index, :create, :update, :show]
-    
     
     # Clock in/out convenience endpoints
     post "/clock_in", to: "sleep_records#clock_in"

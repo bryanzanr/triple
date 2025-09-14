@@ -30,10 +30,14 @@ Design Decision:
 * Prepare the models in app/models (user, follow, sleep_record).
 * Prepare the controllers and serialization in app/controllers (main application, user that include follow flow / mechanism, sleep_record that includes clock in / out action). 
 * Execute rails db:create (to validate the created model / schema if not existed yet, if already existed can execute rails db:drop first which later will create database good_night_development for the app and good_night_test for the spec).
-* Execute rails db:migrate (to generate the initial migration into the previous created databases which will be saved in db/schema.rb).
+* Execute rails db:migrate (to generate the initial migration that include the necessary index in the models into the previous created databases which will be saved in db/schema.rb).
 * Execute rails db:seed (to populate the data from db/seeds.rb which will also remove all of the existing data if any)
 * Prepare the unit tests for previous models (spec/models/) and controllers (spec/requests/). 
 * Execute bundle exec rspec (to check all the unit tests or add the file in the end of statement if wanted to be specific)
+* Execute rails generate rswag:api:install to generate config/initializers/rswag_api.rb and configure the API for /api-docs in the routes (after adding the library in the Gemfile). 
+* Execute rails generate rswag:ui:install to generate config/initializers/rswag_ui.rb and configure the UI for /api-docs in the routes. 
+* Execute rails generate rswag:specs:install to generate spec/swagger_helper.rb for adjust the default URL to http://localhost:3000 instead of https://www.example.com
+* Execute bundle exec rake rswag:specs:swaggerize to generate generate OpenAPI JSON files in swagger/v1/swagger.yaml based on the spec/integration
 * Create docker-compose.yml for running through container.
 * Create README.md for explaining about setup instructions, architecture explanation, and important note. 
 * Create .gitignore for excluding the generated / binary files. 
@@ -108,7 +112,7 @@ try to send a GET request to it, for instance (or you can also execute `rails c`
 * [Clock Out](#out)
 
 ## Index
-URL: GET - `http://localhost:3000/api/users`
+URL: GET - `http://localhost:3000/api/users?page=&items=`
 
 Example Response Body (based on the initial SQL):
 
@@ -172,7 +176,7 @@ Example Response Body:
 ```
 
 ## Following
-URL: GET - `http://localhost:3000/api/users/:id/following_sleep_records?limit=`
+URL: GET - `http://localhost:3000/api/users/following_sleep_records?page=1&items=1`
 
 Example Response Body (with seed data instead of just initial SQL):
 
@@ -190,7 +194,7 @@ Example Response Body (with seed data instead of just initial SQL):
 ```
 
 ## List
-URL: GET - `http://localhost:3000/api/sleep_records`
+URL: GET - `http://localhost:3000/api/sleep_records?page=1&items=1`
 
 Example Response Body (after successful clock in):
 

@@ -22,7 +22,7 @@ RSpec.describe "Users API", type: :request do
     end
   end
 
-  describe "GET /api/users/:id/following_sleep_records" do
+  describe "GET /api/users/following_sleep_records" do
     it "returns previous week sleep records of following users" do
       alice.following << bob
       bob.sleep_records.create!(
@@ -30,7 +30,7 @@ RSpec.describe "Users API", type: :request do
         ended_at:   1.week.ago.beginning_of_week(:monday) + 30.hours
       )
 
-      get "/api/users/#{alice.id}/following_sleep_records", headers: headers
+      get "/api/users/following_sleep_records", headers: headers
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body)
       expect(body["records"].first["user_id"]).to eq(bob.id)
