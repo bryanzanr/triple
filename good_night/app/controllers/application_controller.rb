@@ -12,11 +12,12 @@ class ApplicationController < ActionController::API
         render json: { error: 'X-User-Id header required' }, status: :unauthorized unless @current_user
     end
 
-    def paginated_response(records, per_page)
+    def paginated_response(records, per_page, cache_key)
         prev_page = records.prev_page
         prev_page ||= records.total_pages if records.out_of_range? && records.total_pages > 0
         
-        render json: {
+        payload = Rails.cache.fetch(cache_key, expires_in: 5.minutes) do
+            {
                 records: records.as_json,
                 pagination: {
                     current_page: records.current_page,
@@ -27,5 +28,7 @@ class ApplicationController < ActionController::API
                     per_page: per_page
                 }
             }
+        end
+        render json: payload
     end
 end

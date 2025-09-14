@@ -18,6 +18,7 @@ The web-application is based on Ruby on Rails (RoR) Backend Framework. It's impl
 6. Most of the variable is styled in snake case (best practice in this programming language).
 7. Each of the entity will have their own implementation (Model & Controller).
 8. The sleep records can be edited thorugh PATCH instead of PUT API if it's only a single attribte (despite both are supported). 
+9. Pagination using kaminari and cache using internal memory for development and should use redis in production environment as it's stated in the configuration. 
 
 More detailed information can be found [here](BE%20interview%20homework_v2%20(1)%20(2)%20(1).pdf) or in the source code itself (above each of the method / function).
 

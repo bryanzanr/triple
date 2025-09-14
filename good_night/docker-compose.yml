@@ -1,31 +1,45 @@
 version: "3.9"
+
 services:
   db:
     image: postgres:17
     container_name: good_night_db
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: good_night_development
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
+  redis:
+    image: redis:7
+    container_name: good_night_redis
+    restart: always
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
   web:
     build: .
-    container_name: good_night_app
-    command: bash -c "bin/rails db:prepare && bin/rails server -b 0.0.0.0 -p 3000"
+    container_name: good_night_web
+    restart: always
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/good_night_development
+      REDIS_URL: redis://redis:6379/1
     volumes:
       - .:/app
     ports:
       - "3000:3000"
-    depends_on:
-      - db
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/good_night_development
-      RAILS_ENV: development
+    command: bash -c "bin/rails db:prepare && bin/rails s -b 0.0.0.0 -p 3000"
 
 volumes:
-  db-data:
+  db_data:
+  redis_data:

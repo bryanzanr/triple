@@ -4,11 +4,17 @@ class UsersController < ApplicationController
     before_action :set_user, only: [:show, :follow, :unfollow]
     
     def index
+        page = params[:page].presence&.to_i || 1
         per_page = params[:items].to_i
         per_page = 20 if per_page <= 0
+        cache_key = [
+            "users",
+            page,
+            per_page
+        ].join(":")
         paginated_response(User.all.order(:id)
-            .page(params[:page].presence&.to_i || 1)
-            .per(per_page), per_page)
+            .page(page)
+            .per(per_page), per_page, cache_key)
     end
     
     def show
@@ -40,8 +46,19 @@ class UsersController < ApplicationController
             
             following_ids = @current_user.following.select(:id)
             # sanitize items param
+            page = params[:page].presence&.to_i || 1
             per_page = params[:items].to_i
             per_page = 20 if per_page <= 0   # fallback to default
+
+            cache_key = [
+                "following_sleep_records",
+                @current_user.id,
+                start_of_prev_week,
+                end_of_prev_week,
+                page,
+                per_page
+            ].join(":")
+
             # record considered if it ENDED in previous week
             records = SleepRecord
               .closed_records
@@ -50,10 +67,10 @@ class UsersController < ApplicationController
               .select('sleep_records.*, users.name AS user_name')
               .joins(:user)
               .order(duration_sec: :desc, ended_at: :desc)
-              .page(params[:page].presence&.to_i || 1) # default to page 1
+              .page(page) # default to page 1
               .per(per_page) # default 20 per page
 
-            payload = records.map do |r|
+            records.map do |r|
                 {
                 id: r.id,
                 user_id: r.user_id,
@@ -64,7 +81,7 @@ class UsersController < ApplicationController
                 }
             end
         
-            paginated_response(records, per_page)
+            paginated_response(records, per_page, cache_key)
         end
     end
     
