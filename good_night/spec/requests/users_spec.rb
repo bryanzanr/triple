@@ -33,7 +33,7 @@ RSpec.describe "Users API", type: :request do
       get "/api/users/#{alice.id}/following_sleep_records", headers: headers
       expect(response).to have_http_status(:ok)
       body = JSON.parse(response.body)
-      expect(body.first["user_id"]).to eq(bob.id)
+      expect(body["records"].first["user_id"]).to eq(bob.id)
     end
   end
 end
